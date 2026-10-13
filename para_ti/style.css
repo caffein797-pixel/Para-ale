@@ -1,0 +1,523 @@
+:root {
+  --red: #c9685d;
+  --pink: #e0c0cb;
+  --soft: #d697a3;
+  --cream: #f2d9bd;
+  --dark: #352d2d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background-color: #f8ece8;
+  background-image: url("papell.jpg");
+  background-size: cover;
+  background-position: center;
+  font-family: "Pixelify Sans", sans-serif;
+  color: var(--dark);
+}
+
+img {
+  image-rendering: pixelated;
+}
+
+/* ---------- Pantallas ---------- */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: none;
+  padding: 16px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.screen.active {
+  display: flex;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.panel,
+.lock-wrap,
+.window {
+  margin: auto; /* centra sin cortar el contenido en pantallas chicas */
+}
+
+.panel {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: clamp(22px, 5vw, 30px);
+  margin: 0;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: clamp(24px, 6vw, 34px);
+  margin: 0;
+  color: var(--red);
+}
+
+/* ---------- 1. Sobre + código ---------- */
+.lock-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+#envelope {
+  width: 190px;
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+}
+
+#envelope.open {
+  animation: openEnvelope 0.9s ease forwards;
+}
+
+@keyframes openEnvelope {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(1.5) translateY(-10px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2) translateY(-30px);
+    opacity: 0;
+  }
+}
+
+.keypad-panel {
+  background: var(--pink);
+  border: 4px solid var(--red);
+  box-shadow: 0 6px 0 var(--soft);
+  padding: 14px 18px 16px;
+  text-align: center;
+  transition: opacity 0.4s ease;
+}
+
+.keypad-panel.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lock-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: var(--red);
+}
+
+.code-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  min-height: 54px;
+}
+
+.code-dots span {
+  width: 44px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--dark);
+  background: var(--cream);
+  border: 3px solid var(--red);
+}
+
+.code-dots span.filled {
+  background: #fff;
+}
+
+.code-dots.shake {
+  animation: shake 0.4s;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-8px);
+  }
+  40%,
+  80% {
+    transform: translateX(8px);
+  }
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 84px);
+  gap: 8px;
+  justify-content: center;
+}
+
+.key {
+  height: 56px;
+  font-family: inherit;
+  font-size: 26px;
+  color: var(--dark);
+  background: var(--cream);
+  border: 3px solid var(--red);
+  box-shadow: 0 4px 0 var(--soft);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.key-action {
+  background: var(--soft);
+  font-size: 20px;
+}
+
+.key:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--soft);
+}
+
+.lock-hint {
+  margin: 12px 0 0;
+  font-size: 15px;
+  min-height: 18px;
+}
+
+/* ---------- 2. Pregunta ---------- */
+#screen-ask {
+  overflow: hidden; /* el botón NO nunca se sale de la pantalla */
+}
+
+.window {
+  position: relative;
+  width: min(92vw, 1020px);
+  aspect-ratio: 2016 / 1020;
+  background-image: url("ventana.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.window-content {
+  position: absolute;
+  top: 33%;
+  bottom: 12%;
+  left: 9%;
+  right: 9%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.ask-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.choice {
+  width: clamp(90px, 22vw, 120px);
+  height: auto;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: manipulation;
+}
+
+#yes-btn {
+  position: relative;
+  z-index: 2;
+}
+
+#no-btn {
+  position: relative;
+  z-index: 5;
+  transition: transform 0.25s ease;
+}
+
+/* ---------- Botón siguiente ---------- */
+.next-btn {
+  font-family: inherit;
+  font-size: 22px;
+  color: var(--dark);
+  background: var(--pink);
+  border: 4px solid var(--red);
+  box-shadow: 0 5px 0 var(--soft);
+  padding: 10px 28px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.next-btn:hover {
+  background: var(--cream);
+}
+
+.next-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 var(--soft);
+}
+
+/* ---------- 3. Carta ---------- */
+.paper {
+  max-width: 620px;
+  background: var(--cream);
+  border: 4px solid var(--red);
+  box-shadow: 0 8px 0 var(--soft);
+  padding: 26px 24px 28px;
+}
+
+.letter-text {
+  font-size: clamp(18px, 4.2vw, 22px);
+  line-height: 1.45;
+  text-align: left;
+  max-height: 52vh;
+  overflow-y: auto;
+  width: 100%;
+  padding-right: 4px;
+}
+
+.letter-text p {
+  margin: 0 0 12px;
+}
+
+/* ---------- 4. Post-its ---------- */
+.postit-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 22px;
+}
+
+.postit {
+  width: 160px;
+  height: 200px;
+  perspective: 700px;
+  cursor: pointer;
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.2s ease;
+  touch-action: manipulation;
+}
+
+.postit:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.postit-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.postit.flipped .postit-inner {
+  transform: rotateY(180deg);
+}
+
+.postit-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: var(--bg, #f9e4a8);
+  border-bottom: 5px solid rgba(53, 45, 45, 0.18);
+  box-shadow: 3px 5px 0 rgba(53, 45, 45, 0.2);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.postit-back {
+  transform: rotateY(180deg);
+  font-size: 15px;
+  justify-content: flex-start;
+}
+
+.photo-box {
+  width: 100%;
+  height: 105px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 3px solid var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: auto;
+}
+
+.photo-box.no-photo img {
+  display: none;
+}
+
+.photo-box.no-photo::before {
+  content: "Aquí va una foto ♡";
+  font-size: 14px;
+  padding: 6px;
+}
+
+/* ---------- 5. Cassettes ---------- */
+.tape-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 26px;
+}
+
+.tape {
+  position: relative;
+  width: 230px;
+  height: 150px;
+  background: var(--red);
+  border: 4px solid var(--dark);
+  border-radius: 10px;
+  box-shadow: 0 6px 0 rgba(53, 45, 45, 0.3);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+  touch-action: manipulation;
+}
+
+.tape:hover {
+  transform: translateY(-4px);
+}
+
+.tape.playing {
+  transform: translateY(-6px);
+  background: #b8564b;
+}
+
+.tape-label {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  right: 14px;
+  height: 62px;
+  background: var(--cream);
+  border: 3px solid var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  font-size: 17px;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.tape-window {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  width: 140px;
+  height: 40px;
+  transform: translateX(-50%);
+  background: var(--dark);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
+.reel {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 5px dashed var(--red);
+}
+
+.tape.playing .reel {
+  animation: spin 1.1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tape.playing::after {
+  content: "♪";
+  position: absolute;
+  top: -22px;
+  right: 10px;
+  font-size: 26px;
+  color: var(--red);
+  animation: bounce 0.8s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.tape-status {
+  margin: 0;
+  min-height: 22px;
+  font-size: 18px;
+}
+
+/* ---------- Botones de navegación ---------- */
+.nav-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.back-btn {
+  background: var(--cream);
+}

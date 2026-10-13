@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Para ti</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- 1. SOBRE + CÓDIGO -->
+    <section id="screen-lock" class="screen active">
+      <div class="lock-wrap">
+        <img src="corazon.gif" alt="Sobre" id="envelope" />
+        <div class="keypad-panel" id="keypad-panel">
+          <p class="lock-title">♡ Ingresa el código ♡</p>
+          <div id="code-dots" class="code-dots"></div>
+          <div id="keypad" class="keypad"></div>
+          <p id="lock-hint" class="lock-hint"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. PREGUNTA SÍ / NO -->
+    <section id="screen-ask" class="screen">
+      <div class="window">
+        <div class="window-content">
+          
+          <h1>Preparé algo para ti</h1>
+          <h2>¿Quieres verlo?</h2>
+          <div class="ask-buttons">
+            <img src="yes.png" alt="Sí" id="yes-btn" class="choice" width="300" />
+            <img src="no.png" alt="No" id="no-btn" class="choice" width="300" />
+          </div>
+          <img src="flores.gif" width="100" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CARTA -->
+    <section id="screen-letter" class="screen">
+      <div class="panel paper">
+        <h2 id="letter-title"></h2>
+        <div id="letter-text" class="letter-text"></div>
+        <img src="ciervo.gif" />
+        <button class="next-btn" data-go="screen-notes">Siguiente ♡</button>
+      </div>
+    </section>
+
+    <!-- 4. POST-ITS -->
+    <section id="screen-notes" class="screen">
+      <div class="panel">
+        <h2>Toca los post-its ♡</h2>
+        <div id="postit-grid" class="postit-grid"></div>
+        <div class="nav-row">
+          <button class="next-btn back-btn" data-go="screen-letter">← Atrás</button>
+          <button class="next-btn" data-go="screen-tapes">Siguiente ♡</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CASSETTES -->
+    <section id="screen-tapes" class="screen">
+      <div class="panel">
+        <h2>Elige un cassette ♡</h2>
+        <div id="tape-grid" class="tape-grid"></div>
+        <p id="tape-status" class="tape-status"></p>
+        <div class="nav-row">
+          <button class="next-btn back-btn" data-go="screen-notes">← Atrás</button>
+        </div>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
